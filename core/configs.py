@@ -1,15 +1,18 @@
 
 
 from pydantic import  AnyHttpUrl
+from typing import Any
 from pydantic_settings import BaseSettings
-from sqlalchemy.ext.declarative import declarative_base
+from decouple import config
 
-
+user = config('USER')
+password = config('USER')
+port = config('USER')
+database = config('USER')
 
 class Settings(BaseSettings):
-    API_V1_STR = '/api/v1'
-    DB_URL: str = "postgresql+asyncpg://postgres:123@127.0.0.1:5432/faculdade"
-    DBBaseModel = declarative_base()
+    API_V1_STR: str = '/api/v1'
+    DB_URL: str = f"postgresql+asyncpg://{user}:{password}@localhost:{port}/{database}"
 
     class Config:
         case_sensitive = True
